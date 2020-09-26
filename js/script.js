@@ -4,6 +4,8 @@ const links = document.querySelectorAll('.titles a');
 const titles = document.querySelector('.titles');
 const articles = document.querySelectorAll('.posts article');
 
+
+
 const titleClickHandler = function (event) {
   event.preventDefault();
   const clickedElement = this;
@@ -50,3 +52,23 @@ function generateTitleLinks() {
 
 generateTitleLinks();
 
+function generateTags() {
+  const linkLeftSide = '<li><a href="#';
+  const linkMiddleSide = '">';
+  const linkRightSide = '</a></li>';
+
+  for (let article of articles) {
+    const tags = article.querySelector('.post-tags .list');
+    const articleTag = article.getAttribute('data-tags');
+    const articleTagArray = articleTag.split(' ');
+    tags.innerHTML = '';
+
+    for (let tag of articleTagArray) {
+      const linkHTML = linkLeftSide + tag + linkMiddleSide + tag + linkRightSide;
+      tags.innerHTML = tags.innerHTML + ' ' + linkHTML;
+    }
+  }
+
+}
+
+generateTags();
